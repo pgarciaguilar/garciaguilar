@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedro Garcia Aguilar — IT Manager</title>
+  <meta name="description" content="Pedro García Aguilar — IT Manager especializado en Infrastructure & Cloud, IT Operations y Vendor Strategy. Más de 15 años de experiencia en Barcelona." />
+  <meta name="keywords" content="Pedro Garcia Aguilar, IT Manager, Barcelona, Infrastructure, Cloud, IT Operations, Vendor Strategy" />
+  <meta name="author" content="Pedro García Aguilar" />
+  <meta property="og:title" content="Pedro García Aguilar — IT Manager" />
+  <meta property="og:description" content="IT Manager con más de 15 años de experiencia en Infrastructure & Cloud, IT Operations y Vendor Strategy. Basado en Barcelona." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://garciaguilar.com" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Pedro García Aguilar — IT Manager" />
+  <meta name="twitter:description" content="IT Manager con más de 15 años de experiencia en Infrastructure & Cloud. Basado en Barcelona." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --surface: #171717;
+      --border: #2a2a2a;
+      --accent: #e8ff47;
+      --accent2: #47c5ff;
+      --text: #f0f0f0;
+      --muted: #888;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    body.light {
+      --bg: #ffffff;
+      --surface: #f2f2f2;
+      --border: #e0e0e0;
+      --accent: #b8c800;
+      --accent2: #0088cc;
+      --text: #111111;
+      --muted: #555;
+    }
+    body.light nav { background: rgba(245,245,240,0.9); }
+    body.light .chat-window { box-shadow: 0 16px 48px rgba(0,0,0,0.15); }
+    /* THEME TOGGLE */
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .theme-toggle .icon-moon { display: block; }
+    .theme-toggle .icon-sun { display: none; }
+    body.light .theme-toggle .icon-moon { display: none; }
+    body.light .theme-toggle .icon-sun { display: block; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(232,255,71,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 42ch;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0f0f0f;
+    }
+
+    .btn-primary:hover {
+      background: #fff;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* HERO RIGHT — STATS */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .stat-card {
+      background: var(--surface);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+
+    .stat-card:hover { background: #1e1e1e; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .stat-card.wide {
+      grid-column: span 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .stat-card.wide .stat-text { flex: 1; }
+
+    .location-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--accent2);
+      font-weight: 500;
+    }
+
+    .location-badge svg { flex-shrink: 0; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15,15,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* SECTION */
+    section {
+      padding: 6rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 3rem;
+      line-height: 1.1;
+    }
+
+    /* EXPERIENCE */
+    .experience-grid {
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .exp-item {
+      background: var(--surface);
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      transition: background 0.2s;
+    }
+
+    .exp-item:hover { background: #1a1a1a; }
+
+    .exp-meta {
+      padding-top: 0.2rem;
+    }
+
+    .exp-period {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-display);
+    }
+
+    .exp-company {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .exp-role {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .exp-bullets li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding-left: 1rem;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+      top: 0.15em;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .skill-group {
+      background: var(--surface);
+      padding: 2.5rem;
+    }
+
+    .skill-group-label {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      padding: 0.4rem 0.85rem;
+      font-size: 0.8rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: var(--bg);
+      transition: all 0.2s;
+      font-weight: 400;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* LANGUAGES */
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+
+    .lang-item {
+      background: var(--surface);
+      padding: 1.75rem;
+    }
+
+    .lang-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .lang-level {
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* EDUCATION */
+    .edu-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+    }
+
+    .edu-period {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      font-family: var(--font-display);
+      padding-top: 0.2rem;
+    }
+
+    .edu-degree {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-school {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+    .contact-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .contact-item {
+      background: var(--surface);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .contact-item:hover { background: #1e1e1e; }
+
+    .contact-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-value {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .footer-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+    .fade-in:nth-child(3) { animation-delay: 0.3s; }
+    .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+    /* HERO PHOTO */
+    .hero-photo {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .hero-photo-wrap {
+      position: relative;
+      width: 220px;
+      flex-shrink: 0;
+    }
+    .hero-photo-wrap img {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border: 3px solid var(--accent);
+    }
+    .hero-photo-accent {
+      display: none;
+    }
+
+    /* ABOUT */
+    .about-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.8;
+      position: relative;
+      text-align: justify;
+    }
+    .about-quote-open {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--accent);
+      line-height: 1;
+      vertical-align: -0.4rem;
+      margin-right: 0.15rem;
+    }
+    .about-quote-close {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--accent);
+      line-height: 1;
+      vertical-align: -0.4rem;
+      margin-left: 0.15rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; gap: 3rem; min-height: auto; padding-top: 8rem; }
+      .hero::after { display: none; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .lang-grid { grid-template-columns: 1fr 1fr; }
+      .contact-block { grid-template-columns: 1fr; }
+      .edu-block { grid-template-columns: 1fr; gap: 0.5rem; }
+      .nav-links { display: none; }
+      .stat-card.wide { flex-direction: column; align-items: flex-start; }
+      .hero-photo-wrap { width: 160px; }
+      .hero-photo-wrap img { width: 160px; height: 160px; border-radius: 50%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">PGA<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi" data-nav="about">Sobre mí</a></li>
+      <li><a href="#experiencia" data-nav="exp">Experiencia</a></li>
+      <li><a href="#skills" data-nav="skills">Skills</a></li>
+      <li><a href="#formacion" data-nav="edu">Formación</a></li>
+      <li><a href="#contacto" data-nav="contact">Contacto</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg class="icon-moon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </nav>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div>
+        <div class="hero-label fade-in">IT Manager · Barcelona</div>
+        <div style="display:flex;align-items:flex-start;gap:2rem;margin-bottom:1.5rem;" class="fade-in">
+          <h1 style="margin-bottom:0;">Pedro<br /><span>García</span><br />Aguilar</h1>
+          <div class="hero-photo-wrap" style="margin-top:0.5rem;">
+            <img src="pedro.jpg" alt="Pedro García Aguilar" />
+            <div class="hero-photo-accent"></div>
+          </div>
+        </div>
+        <p class="hero-description fade-in">
+          IT Manager especializado en Infrastructure & Cloud, IT Operations y Vendor Strategy. 
+          Más de 15 años haciendo que la tecnología impulse el negocio en lugar de frenarlo — 
+          desde el helpdesk hasta liderar la infraestructura global para más de 500 personas.
+        </p>
+        <div class="hero-cta fade-in">
+          <a href="#contacto" class="btn btn-primary">Contactar</a>
+          <a href="https://www.linkedin.com/in/pgarciaguilar/" target="_blank" class="btn btn-ghost">LinkedIn →</a>
+        </div>
+      </div>
+
+      <div class="hero-stats fade-in">
+        <div class="stat-card">
+          <div class="stat-number">15+</div>
+          <div class="stat-label">Años de experiencia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Años liderando equipos IT</div>
+        </div>
+        <div class="stat-card wide">
+          <div class="stat-text">
+            <div class="stat-number" style="font-size:1.4rem; line-height:1.3;">Entornos de 500+ empleados</div>
+            <div class="stat-label">Pharma & Tech internacional · sectores de alta exigencia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOBRE MÍ -->
+    <section id="sobre-mi">
+      <div class="section-label" data-i18n="about.label">Sobre mí</div>
+      <h2 data-i18n="about.title">Quién soy</h2>
+      <div class="about-block">
+        <span class="about-quote-open">"</span><span id="aboutText">Mi carrera empezó como Helpdesk Junior y ha ido creciendo desde lo más básico hasta donde estoy hoy; no por suerte sino por disciplina, aprendiendo de cada compañero y de cada proyecto en el que he participado. Me gusta que las cosas funcionen, que los equipos tengan claridad y que la tecnología no sea un problema sino una ventaja. Fuera de la oficina me encontrarás planeando el próximo viaje, en algún parque temático con mis hijos, descubriendo nuevas recetas de cocina para hacerlas el fin de semana, o perdido en algún videojuego retro.</span><span class="about-quote-close">"</span>
+      </div>
+    </section>
+
+    <!-- EXPERIENCIA -->
+    <section id="experiencia">
+      <div class="section-label">Trayectoria</div>
+      <h2>Experiencia<br />profesional</h2>
+
+      <div class="experience-grid">
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-period">Oct 2023 — Presente</div>
+            <div class="exp-company">Win Systems · Sant Cugat · Híbrido</div>
+          </div>
+          <div>
+            <div class="exp-role">IT Manager</div>
+            <ul class="exp-bullets">
+              <li>Liderazgo del equipo de técnicos gestionando la infraestructura IT global para más de 500 empleados.</li>
+              <li>Definición de estrategia tecnológica alineada con los objetivos del negocio internacional.</li>
+              <li>Gestión de proveedores, negociación de contratos y optimización de costes IT.</li>
+              <li>Responsable de seguridad de la información y gestión de activos tecnológicos.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-meta">
+            <div class="exp-period">Ene 2011 — Oct 2023</div>
+            <div class="exp-company">LETI Pharma · Barcelona · 12 años 10 meses</div>
+          </div>
+          <div>
+            <div class="exp-role">IT Specialist</div>
+            <ul class="exp-bullets">
+              <li>Progresión desde Helpdesk Junior hasta IT Specialist a lo largo de 12 años en empresa farmacéutica internacional.</li>
+              <li>Diseño e implantación de infraestructura cloud basada en Citrix sobre entorno VMware.</li>
+              <li>Implementación de sistemas de monitorización con Nagios y gestión de virtualización (VMware, Hyper-V).</li>
+              <li>Administración de Microsoft 365, Azure y herramientas de colaboración (Teams, MDM, VoIP).</li>
+              <li>Gestión de Backup & Recovery, ITSM y ticketing bajo SLA.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-label">Competencias</div>
+      <h2>Skills</h2>
+
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-label">IT Manager — Win Systems</div>
+          <div class="skill-tags">
+            <span class="tag">Gestión de proyectos IT</span>
+            <span class="tag">Liderazgo de equipos</span>
+            <span class="tag">Seguridad de la información</span>
+            <span class="tag">Estrategia tecnológica</span>
+            <span class="tag">Negociación con proveedores</span>
+            <span class="tag">Optimización de costes</span>
+            <span class="tag">Gestión de activos IT</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">IT Specialist — LETI Pharma</div>
+          <div class="skill-tags">
+            <span class="tag">Administración servidores y redes</span>
+            <span class="tag">VMware · Hyper-V · Citrix</span>
+            <span class="tag">Microsoft 365 & Azure</span>
+            <span class="tag">Backup & Recovery</span>
+            <span class="tag">ITSM & Ticketing</span>
+            <span class="tag">Teams · MDM · VoIP</span>
+            <span class="tag">Troubleshooting avanzado</span>
+            <span class="tag">Administración de sistemas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMACIÓN + IDIOMAS -->
+    <section id="formacion">
+      <div class="section-label">Formación & Idiomas</div>
+      <h2>Educación</h2>
+
+      <div class="lang-grid">
+        <div class="lang-item">
+          <div class="lang-name">Castellano</div>
+          <div class="lang-level">Nativo</div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Català</div>
+          <div class="lang-level">Nativo</div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">English</div>
+          <div class="lang-level">Professional</div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-name">Deutsch</div>
+          <div class="lang-level">Básico</div>
+        </div>
+      </div>
+
+      <div class="edu-block">
+        <div class="edu-period">2006 — 2010</div>
+        <div>
+          <div class="edu-degree">Grado en Telecomunicaciones</div>
+          <div class="edu-school">UPC · EUETIB — Escola Universitària d'Enginyeria Tècnica Industrial de Barcelona</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <div class="section-label">Contacto</div>
+      <h2>Hablamos</h2>
+
+      <div class="contact-block">
+        <a href="#" id="emailLink" class="contact-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><span class="__cf_email__" data-cfemail="cabaafaeb8a58aadabb8a9a3abadbfa3a6abb8e4a9a5a7">[email&#160;protected]</span></div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/pgarciaguilar/" target="_blank" class="contact-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-value">pgarciaguilar</div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-copy">© 2026 Pedro García Aguilar · garciaguilar.com</div>
+      <div class="footer-dot"></div>
+    </footer>
+
+  </div>
+
+  <!-- PGA ASSISTANT CHATBOT -->
+  <style>
+    /* CHAT BUTTON */
+    .chat-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .chat-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .chat-btn svg { color: #0f0f0f; }
+
+    /* CHAT WINDOW */
+    .chat-window {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      width: 360px;
+      max-height: 520px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      z-index: 1000;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .chat-window.open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    }
+
+    /* CHAT HEADER */
+    .chat-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .chat-header-info { display: flex; align-items: center; gap: 0.75rem; }
+    .chat-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid var(--accent);
+    }
+    .chat-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .chat-header-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .chat-header-sub {
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .chat-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      transition: color 0.2s;
+    }
+    .chat-close:hover { color: var(--text); }
+
+    /* MESSAGES */
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .msg {
+      max-width: 85%;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      border-radius: 2px;
+    }
+    .msg-bot {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      align-self: flex-start;
+    }
+    .msg-user {
+      background: var(--accent);
+      color: #0f0f0f;
+      align-self: flex-end;
+      font-weight: 500;
+    }
+    .msg-typing {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      align-self: flex-start;
+      padding: 0.75rem 1rem;
+    }
+    .typing-dots { display: flex; gap: 4px; align-items: center; }
+    .typing-dots span {
+      width: 6px; height: 6px;
+      background: var(--muted);
+      border-radius: 50%;
+      animation: dot-bounce 1.2s infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dot-bounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* INPUT */
+    .chat-input-area {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .chat-input {
+      flex: 1;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus { border-color: var(--accent); }
+    .chat-input::placeholder { color: var(--muted); }
+    .chat-send {
+      background: var(--accent);
+      border: none;
+      color: #0f0f0f;
+      width: 36px;
+      height: 36px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .chat-send:hover { background: #fff; }
+    .chat-send:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* SUGGESTED QUESTIONS */
+    .chat-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0 1.25rem 1rem;
+    }
+    .suggestion {
+      font-size: 0.72rem;
+      padding: 0.3rem 0.7rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      border-radius: 2px;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .suggestion:hover { border-color: var(--accent); color: var(--accent); }
+
+    @media (max-width: 480px) {
+      .chat-window {
+        width: 100%;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        max-height: 75vh;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+        position: fixed;
+      }
+      .chat-btn { right: 1rem; bottom: 1rem; }
+    }
+  </style>
+
+  <!-- CHAT BUTTON -->
+  <button class="chat-btn" id="chatBtn" aria-label="Abrir PGA Assistant">
+    <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+  </button>
+
+  <!-- CHAT WINDOW -->
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar"><img src="pedro.jpg" alt="Pedro García Aguilar" /></div>
+        <div>
+          <div class="chat-header-name">PGA Assistant</div>
+          <div class="chat-header-sub">Pregúntame sobre Pedro</div>
+        </div>
+      </div>
+      <button class="chat-close" id="chatClose">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg msg-bot">
+        ¡Hola! Estoy aquí para contarte todo sobre la trayectoria y experiencia de Pedro. ¿Qué quieres saber?
+      </div>
+    </div>
+
+    <div class="chat-suggestions" id="chatSuggestions">
+      <button class="suggestion">¿Qué tecnologías domina?</button>
+      <button class="suggestion">¿Cuánta experiencia tiene?</button>
+      <button class="suggestion">¿En qué sectores ha trabajado?</button>
+    </div>
+
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu pregunta..." maxlength="300" />
+      <button class="chat-send" id="chatSend">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="m22 2-11 11M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  
+  <script>
+  // ============================================================
+  // i18n — Translations
+  // ============================================================
+  const translations = {
+    es: {
+      title: "Pedro Garcia Aguilar — IT Manager",
+      nav: { about: "Sobre mí", exp: "Experiencia", skills: "Skills", edu: "Formación", contact: "Contacto" },
+      about: { label: "Sobre mí", title: "Quién soy", text: "Mi carrera empezó como Helpdesk Junior y ha ido creciendo desde lo más básico hasta donde estoy hoy; no por suerte sino por disciplina, aprendiendo de cada compañero y de cada proyecto en el que he participado. Me gusta que las cosas funcionen, que los equipos tengan claridad y que la tecnología no sea un problema sino una ventaja. Fuera de la oficina me encontrarás planeando el próximo viaje, en algún parque temático con mis hijos, descubriendo nuevas recetas de cocina para hacerlas el fin de semana, o perdido en algún videojuego retro." },
+      hero: {
+        label: "IT Manager · Barcelona",
+        desc: "IT Manager especializado en Infrastructure & Cloud, IT Operations y Vendor Strategy. Más de 15 años haciendo que la tecnología impulse el negocio en lugar de frenarlo — desde el helpdesk hasta liderar la infraestructura global para más de 500 personas.",
+        cta: "Contactar"
+      },
+      stats: {
+        s1: "Años de experiencia",
+        s2: "Años liderando equipos IT",
+        s3: "Entornos de 500+ empleados",
+        s3sub: "Pharma & Tech internacional · sectores de alta exigencia",
+      },
+      exp: {
+        label: "Trayectoria",
+        title: "Experiencia<br/>profesional",
+        p1: "Oct 2023 — Presente",
+        c1: "Win Systems · Sant Cugat · Híbrido",
+        b1: ["Liderazgo del equipo de técnicos gestionando la infraestructura IT global para más de 500 empleados.", "Definición de estrategia tecnológica alineada con los objetivos del negocio internacional.", "Gestión de proveedores, negociación de contratos y optimización de costes IT.", "Responsable de seguridad de la información y gestión de activos tecnológicos."],
+        p2: "Ene 2011 — Oct 2023",
+        c2: "LETI Pharma · Barcelona · 12 años 10 meses",
+        b2: ["Progresión desde Helpdesk Junior hasta IT Specialist a lo largo de 12 años en empresa farmacéutica internacional.", "Diseño e implantación de infraestructura cloud basada en Citrix sobre entorno VMware.", "Implementación de sistemas de monitorización con Nagios y gestión de virtualización (VMware, Hyper-V).", "Administración de Microsoft 365, Azure y herramientas de colaboración (Teams, MDM, VoIP).", "Gestión de Backup & Recovery, ITSM y ticketing bajo SLA."]
+      },
+      skills: { label: "Competencias", g1: "IT Manager — Win Systems", g2: "IT Specialist — LETI Pharma",
+        t1: ["Gestión de proyectos IT","Liderazgo de equipos","Seguridad de la información","Estrategia tecnológica","Negociación con proveedores","Optimización de costes","Gestión de activos IT"],
+        t2: ["Administración servidores y redes","VMware · Hyper-V · Citrix","Microsoft 365 & Azure","Backup & Recovery","ITSM & Ticketing","Teams · MDM · VoIP","Troubleshooting avanzado","Administración de sistemas"]
+      },
+      edu: {
+        label: "Formación & Idiomas", title: "Educación",
+        langs: [["Castellano","Nativo"],["Català","Natiu"],["English","C1"],["Deutsch","B1"]],
+        degree: "Grado en Telecomunicaciones"
+      },
+      contact: { label: "Contacto", title: "Hablamos", email: "Email" },
+      footer: "© 2026 Pedro García Aguilar · garciaguilar.com",
+      chat: { sub: "Pregúntame sobre Pedro", welcome: "¡Hola! Estoy aquí para contarte todo sobre la trayectoria y experiencia de Pedro. ¿Qué quieres saber?", placeholder: "Escribe tu pregunta...", suggestions: ["¿Qué tecnologías domina?","¿Cuánta experiencia tiene?","¿En qué sectores ha trabajado?"] }
+    },
+    ca: {
+      title: "Pedro Garcia Aguilar — IT Manager",
+      nav: { about: "Sobre mi", exp: "Experiència", skills: "Skills", edu: "Formació", contact: "Contacte" },
+      about: { label: "Sobre mi", title: "Qui soc", text: "La meva carrera va començar com a Helpdesk Junior i ha anat creixent des del més bàsic fins on soc avui; no per sort sinó per disciplina, aprenent de cada company i de cada projecte en què he participat. M'agrada que les coses funcionin, que els equips tinguin claredat i que la tecnologia no sigui un problema sinó un avantatge. Fora de l'oficina em trobaràs planejant el proper viatge, en algun parc temàtic amb els meus fills, descobrint noves receptes de cuina per fer el cap de setmana, o perdut en algun videojoc retro." },
+      hero: {
+        label: "IT Manager · Barcelona",
+        desc: "IT Manager especialitzat en Infrastructure & Cloud, IT Operations i Vendor Strategy. Més de 15 anys fent que la tecnologia impulsi el negoci en comptes de frenar-lo — des del helpdesk fins a liderar la infraestructura global per a més de 500 persones.",
+        cta: "Contactar"
+      },
+      stats: {
+        s1: "Anys d'experiència",
+        s2: "Anys liderant equips IT",
+        s3: "Entorns de 500+ empleats",
+        s3sub: "Pharma & Tech internacional · sectors d'alta exigència",
+      },
+      exp: {
+        label: "Trajectòria",
+        title: "Experiència<br/>professional",
+        p1: "Oct 2023 — Present",
+        c1: "Win Systems · Sant Cugat · Híbrid",
+        b1: ["Lideratge de l'equip de tècnics gestionant la infraestructura IT global per a més de 500 empleats.", "Definició d'estratègia tecnològica alineada amb els objectius del negoci internacional.", "Gestió de proveïdors, negociació de contractes i optimització de costos IT.", "Responsable de seguretat de la informació i gestió d'actius tecnològics."],
+        p2: "Gen 2011 — Oct 2023",
+        c2: "LETI Pharma · Barcelona · 12 anys 10 mesos",
+        b2: ["Progressió des de Helpdesk Junior fins a IT Specialist al llarg de 12 anys en empresa farmacèutica internacional.", "Disseny i implantació d'infraestructura cloud basada en Citrix sobre entorn VMware.", "Implementació de sistemes de monitorització amb Nagios i gestió de virtualització (VMware, Hyper-V).", "Administració de Microsoft 365, Azure i eines de col·laboració (Teams, MDM, VoIP).", "Gestió de Backup & Recovery, ITSM i ticketing sota SLA."]
+      },
+      skills: { label: "Competències", g1: "IT Manager — Win Systems", g2: "IT Specialist — LETI Pharma",
+        t1: ["Gestió de projectes IT","Lideratge d'equips","Seguretat de la informació","Estratègia tecnològica","Negociació amb proveïdors","Optimització de costos","Gestió d'actius IT"],
+        t2: ["Administració servidors i xarxes","VMware · Hyper-V · Citrix","Microsoft 365 & Azure","Backup & Recovery","ITSM & Ticketing","Teams · MDM · VoIP","Troubleshooting avançat","Administració de sistemes"]
+      },
+      edu: {
+        label: "Formació & Idiomes", title: "Educació",
+        langs: [["Castellà","Natiu"],["Català","Natiu"],["English","C1"],["Deutsch","B1"]],
+        degree: "Grau en Telecomunicacions"
+      },
+      contact: { label: "Contacte", title: "Parlem", email: "Correu" },
+      footer: "© 2026 Pedro García Aguilar · garciaguilar.com",
+      chat: { sub: "Pregunta'm sobre en Pedro", welcome: "Hola! Estic aquí per explicar-te tot sobre la trajectòria i experiència d'en Pedro. Què vols saber?", placeholder: "Escriu la teva pregunta...", suggestions: ["Quines tecnologies domina?","Quanta experiència té?","En quins sectors ha treballat?"] }
+    },
+    en: {
+      title: "Pedro Garcia Aguilar — IT Manager",
+      nav: { about: "About", exp: "Experience", skills: "Skills", edu: "Education", contact: "Contact" },
+      about: { label: "About me", title: "Who I am", text: "My career started as a Helpdesk Junior and has grown from the most basic level to where I am today; not by luck but by discipline, learning from every colleague and every project I've been part of. I like things to work, teams to have clarity, and technology to be an advantage rather than a problem. Outside the office you'll find me planning the next trip, at a theme park with my kids, trying out new recipes to cook at the weekend, or lost in some retro video game." },
+      hero: {
+        label: "IT Manager · Barcelona",
+        desc: "IT Manager specialising in Infrastructure & Cloud, IT Operations and Vendor Strategy. Over 15 years making technology drive the business forward instead of holding it back — from helpdesk to leading global infrastructure for 500+ people.",
+        cta: "Get in touch"
+      },
+      stats: {
+        s1: "Years of experience",
+        s2: "Years leading IT teams",
+        s3: "500+ employee environments",
+        s3sub: "International Pharma & Tech · high-demand sectors",
+      },
+      exp: {
+        label: "Career",
+        title: "Work<br/>experience",
+        p1: "Oct 2023 — Present",
+        c1: "Win Systems · Sant Cugat · Hybrid",
+        b1: ["Leading the IT team managing global IT infrastructure for 500+ employees.", "Defining technology strategy aligned with international business objectives.", "Vendor management, contract negotiation and IT cost optimisation.", "Responsible for information security and IT asset management."],
+        p2: "Jan 2011 — Oct 2023",
+        c2: "LETI Pharma · Barcelona · 12 years 10 months",
+        b2: ["Progression from Helpdesk Junior to IT Specialist over 12 years at an international pharmaceutical company.", "Design and deployment of Citrix-based cloud infrastructure on VMware.", "Implementation of Nagios monitoring systems and virtualisation management (VMware, Hyper-V).", "Administration of Microsoft 365, Azure and collaboration tools (Teams, MDM, VoIP).", "Backup & Recovery, ITSM and SLA-based ticketing management."]
+      },
+      skills: { label: "Competencies", g1: "IT Manager — Win Systems", g2: "IT Specialist — LETI Pharma",
+        t1: ["IT Project Management","Team Leadership","Information Security","Technology Strategy","Vendor Negotiation","Cost Optimisation","IT Asset Management"],
+        t2: ["Server & Network Administration","VMware · Hyper-V · Citrix","Microsoft 365 & Azure","Backup & Recovery","ITSM & Ticketing","Teams · MDM · VoIP","Advanced Troubleshooting","Systems Administration"]
+      },
+      edu: {
+        label: "Education & Languages", title: "Education",
+        langs: [["Spanish","Native"],["Catalan","Native"],["English","C1"],["German","B1"]],
+        degree: "BSc in Telecommunications Engineering"
+      },
+      contact: { label: "Contact", title: "Let\'s talk", email: "Email" },
+      footer: "© 2026 Pedro García Aguilar · garciaguilar.com",
+      chat: { sub: "Ask me about Pedro", welcome: "Hi! I\'m here to tell you all about Pedro\'s professional background and experience. What would you like to know?", placeholder: "Type your question...", suggestions: ["What technologies does he know?","How much experience does he have?","What sectors has he worked in?"] }
+    }
+  };
+
+  function detectLang() {
+    const lang = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
+    if (lang.startsWith('ca')) return 'ca';
+    if (lang.startsWith('es')) return 'es';
+    return 'en';
+  }
+
+  function applyLang(l) {
+    const t = translations[l];
+    document.title = t.title;
+    document.documentElement.lang = l;
+
+    // NAV
+    const navLinks = document.querySelectorAll('.nav-links a');
+    if (navLinks.length >= 5) {
+      navLinks[0].textContent = t.nav.about;
+      navLinks[1].textContent = t.nav.exp;
+      navLinks[2].textContent = t.nav.skills;
+      navLinks[3].textContent = t.nav.edu;
+      navLinks[4].textContent = t.nav.contact;
+    }
+
+    // ABOUT
+    const aboutSection = document.getElementById('sobre-mi');
+    if (aboutSection) {
+      aboutSection.querySelector('.section-label').textContent = t.about.label;
+      aboutSection.querySelector('h2').textContent = t.about.title;
+      const aboutEl = document.getElementById('aboutText');
+      if (aboutEl) aboutEl.textContent = t.about.text;
+    }
+
+
+
+    // HERO
+    document.querySelector('.hero-label').textContent = t.hero.label;
+    document.querySelector('.hero-description').textContent = t.hero.desc;
+    document.querySelector('.btn-primary').textContent = t.hero.cta;
+
+    // STATS
+    const statLabels = document.querySelectorAll('.stat-label');
+    statLabels[0].textContent = t.stats.s1;
+    statLabels[1].textContent = t.stats.s2;
+    document.querySelector('.stat-number[style*="1.4rem"]').textContent = t.stats.s3;
+    statLabels[2].textContent = t.stats.s3sub;
+
+
+    // EXPERIENCE
+    const expSection = document.getElementById('experiencia');
+    expSection.querySelector('.section-label').textContent = t.exp.label;
+    expSection.querySelector('h2').innerHTML = t.exp.title;
+    const expItems = expSection.querySelectorAll('.exp-item');
+
+    expItems[0].querySelector('.exp-period').textContent = t.exp.p1;
+    expItems[0].querySelector('.exp-company').textContent = t.exp.c1;
+    const b1 = expItems[0].querySelectorAll('.exp-bullets li');
+    t.exp.b1.forEach((txt, i) => { if (b1[i]) b1[i].textContent = txt; });
+
+    expItems[1].querySelector('.exp-period').textContent = t.exp.p2;
+    expItems[1].querySelector('.exp-company').textContent = t.exp.c2;
+    const b2 = expItems[1].querySelectorAll('.exp-bullets li');
+    t.exp.b2.forEach((txt, i) => { if (b2[i]) b2[i].textContent = txt; });
+
+    // SKILLS
+    const skillsSection = document.getElementById('skills');
+    skillsSection.querySelector('.section-label').textContent = t.skills.label;
+    const skillGroups = skillsSection.querySelectorAll('.skill-group');
+    skillGroups[0].querySelector('.skill-group-label').textContent = t.skills.g1;
+    skillGroups[1].querySelector('.skill-group-label').textContent = t.skills.g2;
+    skillGroups[0].querySelectorAll('.tag').forEach((tag, i) => { if (t.skills.t1[i]) tag.textContent = t.skills.t1[i]; });
+    skillGroups[1].querySelectorAll('.tag').forEach((tag, i) => { if (t.skills.t2[i]) tag.textContent = t.skills.t2[i]; });
+
+    // EDUCATION
+    const eduSection = document.getElementById('formacion');
+    eduSection.querySelector('.section-label').textContent = t.edu.label;
+    eduSection.querySelector('h2').textContent = t.edu.title;
+    const langItems = eduSection.querySelectorAll('.lang-item');
+    t.edu.langs.forEach((lang, i) => {
+      if (langItems[i]) {
+        langItems[i].querySelector('.lang-name').textContent = lang[0];
+        langItems[i].querySelector('.lang-level').textContent = lang[1];
+      }
+    });
+    eduSection.querySelector('.edu-degree').textContent = t.edu.degree;
+
+    // CONTACT
+    const contactSection = document.getElementById('contacto');
+    contactSection.querySelector('.section-label').textContent = t.contact.label;
+    contactSection.querySelector('h2').textContent = t.contact.title;
+    contactSection.querySelector('.contact-label').textContent = t.contact.email;
+
+    // FOOTER
+    document.querySelector('.footer-copy').textContent = t.footer;
+
+    // CHAT
+    document.querySelector('.chat-header-sub').textContent = t.chat.sub;
+    document.querySelector('.chat-messages .msg-bot').textContent = t.chat.welcome;
+    document.querySelector('.chat-input').placeholder = t.chat.placeholder;
+    const suggestions = document.querySelectorAll('.suggestion');
+    t.chat.suggestions.forEach((s, i) => { if (suggestions[i]) suggestions[i].textContent = s; });
+  }
+
+  // Apply on load
+  applyLang(detectLang());
+  </script>
+
+<script>
+    // TOGGLE
+    const chatBtn = document.getElementById('chatBtn');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatClose = document.getElementById('chatClose');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatSuggestions = document.getElementById('chatSuggestions');
+
+    chatBtn.addEventListener('click', () => {
+      chatWindow.classList.toggle('open');
+      if (chatWindow.classList.contains('open')) chatInput.focus();
+    });
+    chatClose.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+    // SUGGESTIONS
+    chatSuggestions.querySelectorAll('.suggestion').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sendMessage(btn.textContent);
+        chatSuggestions.style.display = 'none';
+      });
+    });
+
+    // SEND
+    chatSend.addEventListener('click', () => {
+      const text = chatInput.value.trim();
+      if (text) { sendMessage(text); chatInput.value = ''; chatSuggestions.style.display = 'none'; }
+    });
+    chatInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const text = chatInput.value.trim();
+        if (text) { sendMessage(text); chatInput.value = ''; chatSuggestions.style.display = 'none'; }
+      }
+    });
+
+    function addMessage(text, type) {
+      const msg = document.createElement('div');
+      msg.className = `msg msg-${type}`;
+      msg.textContent = text;
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msg;
+    }
+
+    function addTyping() {
+      const msg = document.createElement('div');
+      msg.className = 'msg msg-typing';
+      msg.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+      chatMessages.appendChild(msg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      return msg;
+    }
+
+    // CHAT HISTORY
+    let chatHistory = [];
+
+    async function sendMessage(text) {
+      addMessage(text, 'user');
+      chatSend.disabled = true;
+      chatInput.disabled = true;
+      const typing = addTyping();
+      chatHistory.push({ role: 'user', content: text });
+
+      const SYSTEM = `Eres el PGA Assistant, un agente de IA integrado en la web personal de Pedro García Aguilar, IT Manager con más de 15 años de experiencia en tecnología.
+
+Tu única función es responder preguntas sobre el perfil profesional de Pedro. No respondas nada que no esté relacionado con su trayectoria, habilidades, experiencia o perfil como profesional IT. Si alguien pregunta algo fuera de ese ámbito, redirige amablemente la conversación hacia su perfil.
+
+Responde siempre en el idioma en que te escriban (español, catalán o inglés). Usa un tono natural y cercano, como si fueras Pedro mismo respondiendo — en primera persona cuando tenga sentido, pero sin fingir que eres Pedro. Eres su asistente.
+
+INFORMACIÓN SOBRE PEDRO:
+- Nombre completo: Pedro García Aguilar
+- Ubicación: Barcelona, España. Modalidad híbrida.
+- Contacto profesional: pedro@garciaguilar.com
+- LinkedIn: linkedin.com/in/pgarciaguilar
+
+EXPERIENCIA:
+1. IT Manager — Win Systems (Oct 2023 – presente)
+   - Empresa internacional de tecnología para el sector del juego, con más de 500 empleados, sede en Sant Cugat del Vallès.
+   - Liderazgo del equipo IT, gestión de infraestructura global, estrategia tecnológica, negociación con proveedores, seguridad de la información, optimización de costes y gestión de activos IT.
+
+2. IT Specialist (y progresión desde Helpdesk Junior) — LETI Pharma (Ene 2011 – Oct 2023, 12 años 10 meses)
+   - Empresa farmacéutica internacional con más de 500 empleados, Barcelona.
+   - Progresión completa: Helpdesk Junior → Helpdesk Support → Helpdesk L2 → IT Specialist.
+   - Diseño e implantación de infraestructura cloud con Citrix sobre VMware.
+   - Monitorización con Nagios, virtualización con VMware e Hyper-V.
+   - Administración de Microsoft 365, Azure, Teams, MDM, VoIP.
+   - Gestión de Backup & Recovery, ITSM y ticketing bajo SLA.
+
+SKILLS:
+- Management: Gestión de proyectos IT, liderazgo de equipos, seguridad de la información, estrategia tecnológica, negociación con proveedores, optimización de costes, gestión de activos IT.
+- Técnicas: Administración de servidores y redes, VMware, Hyper-V, Citrix, Microsoft 365, Azure, Backup & Recovery, ITSM, Teams, MDM, VoIP, troubleshooting avanzado, administración de sistemas.
+
+FORMACIÓN:
+- Grado en Telecomunicaciones — UPC · EUETIB, Barcelona (2006–2010)
+
+IDIOMAS: Castellano (nativo), Català (natiu), English (professional), Deutsch (básico).
+
+PERFIL PERSONAL (para dar contexto): Persona competitiva y perseverante, convencida de que disciplina y constancia son la clave del crecimiento. Ha construido su carrera desde abajo, aprendiendo de las personas con las que trabajaba.
+
+Respuestas concisas, máximo 3-4 frases salvo que se pida más detalle. No uses listas con bullets en el chat, escribe en prosa natural.`;
+
+      try {
+        const response = await fetch('https://pga-chat.pedrogarciaaguilar.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            system: SYSTEM,
+            messages: chatHistory
+          })
+        });
+
+        const data = await response.json();
+        typing.remove();
+        const reply = data.content?.[0]?.text || 'Lo siento, ha habido un error. Inténtalo de nuevo.';
+        chatHistory.push({ role: 'assistant', content: reply });
+        addMessage(reply, 'bot');
+      } catch (e) {
+        typing.remove();
+        addMessage('Ha habido un error de conexión. Inténtalo de nuevo.', 'bot');
+      } finally {
+        chatSend.disabled = false;
+        chatInput.disabled = false;
+        chatInput.focus();
+      }
+    }
+    // EMAIL LINK - bypass Cloudflare obfuscation
+    const el = document.getElementById('emailLink');
+    if (el) {
+      const e = 'pedro' + '@' + 'garciaguilar.com';
+      el.href = 'mailto:' + e;
+    }
+
+    // THEME TOGGLE
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') document.body.classList.add('light');
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light');
+        localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+      });
+    }
+  </script>
+
+</body>
+</html>
