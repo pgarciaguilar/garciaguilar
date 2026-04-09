@@ -1542,35 +1542,14 @@ Keep responses concise, max 3-4 sentences. Natural prose, no bullet lists.`
       requestAnimationFrame(update);
     }
 
-    // Observe stats section to trigger counters when visible
-    const statsObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const text = el.textContent.trim();
-          if (text.startsWith('15')) animateCounter(el, 15, '+', 2500);
-          else if (text.startsWith('5') && !text.includes('00')) animateCounter(el, 5, '+', 2000);
-          statsObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.stat-number').forEach(el => {
-      const text = el.textContent.trim();
-      if (text === '15+' || text === '5+') {
-        statsObserver.observe(el);
-      }
-    });
-
-    // Re-observe after i18n applies (small delay)
+    // Start counters after fade completes (~1s delay)
     setTimeout(() => {
       document.querySelectorAll('.stat-number').forEach(el => {
         const text = el.textContent.trim();
-        if (text === '15+' || text === '5+') {
-          statsObserver.observe(el);
-        }
+        if (text === '15+') animateCounter(el, 15, '+', 2000);
+        else if (text === '5+') animateCounter(el, 5, '+', 1500);
       });
-    }, 300);
+    }, 1000);
 
     // 2. Reveal animation for hero elements on load
     const heroElements = document.querySelectorAll('.fade-in');
