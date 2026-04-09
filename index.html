@@ -599,17 +599,11 @@
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
-      animation: fadeIn 0.6s ease forwards;
     }
 
     @keyframes fadeIn {
       to { opacity: 1; transform: translateY(0); }
     }
-
-    .fade-in:nth-child(1) { animation-delay: 0.1s; }
-    .fade-in:nth-child(2) { animation-delay: 0.2s; }
-    .fade-in:nth-child(3) { animation-delay: 0.3s; }
-    .fade-in:nth-child(4) { animation-delay: 0.4s; }
 
     /* HERO PHOTO */
     .hero-photo {
@@ -1549,35 +1543,45 @@ Keep responses concise, max 3-4 sentences. Natural prose, no bullet lists.`
     }
 
     // Observe stats section to trigger counters when visible
-    const statNumbers = document.querySelectorAll('.stat-number');
     const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const el = entry.target;
           const text = el.textContent.trim();
-          if (text === '15+') animateCounter(el, 15, '+', 1200);
-          else if (text === '5+') animateCounter(el, 5, '+', 800);
+          if (text.startsWith('15')) animateCounter(el, 15, '+', 2500);
+          else if (text.startsWith('5') && !text.includes('00')) animateCounter(el, 5, '+', 2000);
           statsObserver.unobserve(el);
         }
       });
     }, { threshold: 0.5 });
 
-    statNumbers.forEach(el => {
-      if (el.textContent.trim() === '15+' || el.textContent.trim() === '5+') {
+    document.querySelectorAll('.stat-number').forEach(el => {
+      const text = el.textContent.trim();
+      if (text === '15+' || text === '5+') {
         statsObserver.observe(el);
       }
     });
 
-    // 2. Subtle reveal animation for hero elements on load
+    // Re-observe after i18n applies (small delay)
+    setTimeout(() => {
+      document.querySelectorAll('.stat-number').forEach(el => {
+        const text = el.textContent.trim();
+        if (text === '15+' || text === '5+') {
+          statsObserver.observe(el);
+        }
+      });
+    }, 300);
+
+    // 2. Reveal animation for hero elements on load
     const heroElements = document.querySelectorAll('.fade-in');
     heroElements.forEach((el, i) => {
       el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = `opacity 0.6s ease ${i * 0.12}s, transform 0.6s ease ${i * 0.12}s`;
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = `opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${0.15 + i * 0.18}s, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${0.15 + i * 0.18}s`;
       setTimeout(() => {
         el.style.opacity = '1';
         el.style.transform = 'translateY(0)';
-      }, 50);
+      }, 100);
     });
 
     // THEME TOGGLE
