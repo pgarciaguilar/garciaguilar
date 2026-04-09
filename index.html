@@ -10,10 +10,14 @@
   <meta property="og:title" content="Pedro García Aguilar — IT Manager" />
   <meta property="og:description" content="IT Manager con más de 15 años de experiencia en Infrastructure & Cloud, IT Operations y Vendor Strategy. Basado en Barcelona." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://garciaguilar.com" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:url" content="https://www.garciaguilar.com" />
+  <meta property="og:image" content="https://www.garciaguilar.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Pedro García Aguilar — IT Manager" />
   <meta name="twitter:description" content="IT Manager con más de 15 años de experiencia en Infrastructure & Cloud. Basado en Barcelona." />
+  <meta name="twitter:image" content="https://www.garciaguilar.com/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
@@ -582,7 +586,16 @@
       50% { opacity: 0.3; }
     }
 
-    /* ANIMATIONS */
+    /* COUNTER ANIMATION */
+    .stat-number[data-count] {
+      display: inline-block;
+    }
+
+    /* TYPEWRITER */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -1519,6 +1532,53 @@ Keep responses concise, max 3-4 sentences. Natural prose, no bullet lists.`
       const e = 'pedro' + '@' + 'garciaguilar.com';
       el.href = 'mailto:' + e;
     }
+
+    // HERO ANIMATIONS
+    // 1. Counter animation for stats
+    function animateCounter(el, target, suffix, duration) {
+      const start = performance.now();
+      const update = (time) => {
+        const elapsed = time - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    // Observe stats section to trigger counters when visible
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const text = el.textContent.trim();
+          if (text === '15+') animateCounter(el, 15, '+', 1200);
+          else if (text === '5+') animateCounter(el, 5, '+', 800);
+          statsObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(el => {
+      if (el.textContent.trim() === '15+' || el.textContent.trim() === '5+') {
+        statsObserver.observe(el);
+      }
+    });
+
+    // 2. Subtle reveal animation for hero elements on load
+    const heroElements = document.querySelectorAll('.fade-in');
+    heroElements.forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = `opacity 0.6s ease ${i * 0.12}s, transform 0.6s ease ${i * 0.12}s`;
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      }, 50);
+    });
 
     // THEME TOGGLE
     const themeToggle = document.getElementById('themeToggle');
