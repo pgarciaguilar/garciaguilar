@@ -559,6 +559,80 @@
       color: var(--text);
     }
 
+    /* CONTACT FORM */
+    .contact-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      margin-bottom: 1px;
+    }
+    .contact-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .form-group.full { grid-column: span 2; }
+    .form-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: var(--font-display);
+    }
+    .form-input, .form-textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 0.75rem 1rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); opacity: 0.5; }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .form-submit {
+      background: var(--accent);
+      color: #0f0f0f;
+      border: none;
+      padding: 0.85rem 2rem;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .form-submit:hover { background: #fff; }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .form-success {
+      display: none;
+      color: var(--accent);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 1rem;
+      border: 1px solid var(--accent);
+      margin-top: 1rem;
+    }
+    .form-success.visible { display: block; }
+    @media (max-width: 768px) {
+      .contact-form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: span 1; }
+    }
+
     /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
@@ -885,6 +959,25 @@
     <section id="contacto">
       <div class="section-label">Contacto</div>
       <h2>Hablamos</h2>
+
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvzdzkle" method="POST">
+        <div class="contact-form-grid">
+          <div class="form-group">
+            <label class="form-label" id="formNameLabel" for="name">Nombre</label>
+            <input class="form-input" type="text" id="name" name="name" required placeholder="Tu nombre" title="Escribe tu nombre completo" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="formEmailLabel" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" required placeholder="tu@email.com" title="Escribe tu dirección de correo" />
+          </div>
+          <div class="form-group full">
+            <label class="form-label" id="formMsgLabel" for="message">Mensaje</label>
+            <textarea class="form-textarea" id="message" name="message" required placeholder="¿En qué puedo ayudarte?" title="Escribe el mensaje que quieras enviar a Pedro"></textarea>
+          </div>
+        </div>
+        <button class="form-submit" id="formSubmit" type="submit">Enviar mensaje</button>
+        <div class="form-success" id="formSuccess">✓ Mensaje enviado. Te respondo en breve.</div>
+      </form>
 
       <div class="contact-block">
         <a href="#" id="emailLink" class="contact-item">
@@ -1385,6 +1478,22 @@
     });
     eduSection.querySelector('.edu-degree').textContent = t.edu.degree;
 
+    // CONTACT FORM labels
+    const formLabels = {
+      es: { name: 'Nombre', email: 'Email', msg: 'Mensaje', ph_name: 'Tu nombre', ph_msg: '¿En qué puedo ayudarte?', submit: 'Enviar mensaje', success: '✓ Mensaje enviado. Te respondo en breve.', title_name: 'Escribe tu nombre completo', title_email: 'Escribe tu dirección de correo', title_msg: 'Escribe el mensaje que quieras enviar a Pedro' },
+      ca: { name: 'Nom', email: 'Email', msg: 'Missatge', ph_name: 'El teu nom', ph_msg: 'En què et puc ajudar?', submit: 'Enviar missatge', success: '✓ Missatge enviat. Et respondré aviat.', title_name: 'Escriu el teu nom complet', title_email: 'Escriu la teva adreça de correu', title_msg: 'Escriu el missatge que vulguis enviar a en Pedro' },
+      en: { name: 'Name', email: 'Email', msg: 'Message', ph_name: 'Your name', ph_msg: 'How can I help you?', submit: 'Send message', success: "✓ Message sent. I'll get back to you shortly.", title_name: 'Enter your full name', title_email: 'Enter your email address', title_msg: 'Write the message you want to send to Pedro' }
+    };
+    const fl = formLabels[l] || formLabels.en;
+    const fnl = document.getElementById('formNameLabel'); if (fnl) fnl.textContent = fl.name;
+    const fel = document.getElementById('formEmailLabel'); if (fel) fel.textContent = fl.email;
+    const fml = document.getElementById('formMsgLabel'); if (fml) fml.textContent = fl.msg;
+    const fni = document.getElementById('name'); if (fni) { fni.placeholder = fl.ph_name; fni.title = fl.title_name; }
+    const fei = document.getElementById('email'); if (fei) fei.title = fl.title_email;
+    const fmi = document.getElementById('message'); if (fmi) { fmi.placeholder = fl.ph_msg; fmi.title = fl.title_msg; }
+    const fsb = document.getElementById('formSubmit'); if (fsb && !fsb.disabled) fsb.textContent = fl.submit;
+    const fsc = document.getElementById('formSuccess'); if (fsc) fsc.textContent = fl.success;
+
     // CONTACT
     const contactSection = document.getElementById('contacto');
     contactSection.querySelector('.section-label').textContent = t.contact.label;
@@ -1548,6 +1657,36 @@ Keep responses concise, max 3-4 sentences. Natural prose, no bullet lists.`
         chatInput.focus();
       }
     }
+    // CONTACT FORM
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('formSubmit');
+        const success = document.getElementById('formSuccess');
+        btn.disabled = true;
+        btn.textContent = '...';
+        try {
+          const res = await fetch(contactForm.action, {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            contactForm.reset();
+            success.classList.add('visible');
+            btn.textContent = '✓ Enviado';
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'Enviar mensaje';
+          }
+        } catch {
+          btn.disabled = false;
+          btn.textContent = 'Enviar mensaje';
+        }
+      });
+    }
+
     // EMAIL LINK - bypass Cloudflare obfuscation
     const el = document.getElementById('emailLink');
     if (el) {
