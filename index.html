@@ -910,7 +910,7 @@
 
     <!-- FOOTER -->
     <footer>
-      <div class="footer-copy">© 2026 Pedro García Aguilar · garciaguilar.com</div>
+      <div class="footer-copy">© 2026 Pedro García Aguilar · garciaguilar.com · <span style="color:#2a2a2a;font-family:'Courier New',monospace;">Konami Code: ON</span></div>
       <div class="footer-dot"></div>
     </footer>
 
@@ -1392,7 +1392,7 @@
     contactSection.querySelector('.contact-label').textContent = t.contact.email;
 
     // FOOTER
-    document.querySelector('.footer-copy').textContent = t.footer;
+    document.querySelector('.footer-copy').innerHTML = t.footer + ' · <span style="color:#2a2a2a;font-family:\'Courier New\',monospace;">Konami Code: ON</span>';
 
     // CHAT
     document.querySelector('.chat-header-sub').textContent = t.chat.sub;
@@ -1600,6 +1600,255 @@ Keep responses concise, max 3-4 sentences. Natural prose, no bullet lists.`
         document.body.classList.toggle('light');
         localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
       });
+    }
+  </script>
+
+  <!-- EASTER EGG: KONAMI CODE + NES EMULATOR -->
+  <style>
+    #nes-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 99999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Courier New', monospace;
+    }
+    #nes-overlay.active { display: flex; }
+
+    .nes-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .nes-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #e8ff47;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+    .nes-header p {
+      color: #555;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .nes-game-select {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .nes-game-btn {
+      background: #111;
+      border: 2px solid #2a2a2a;
+      color: #888;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+      text-align: center;
+      min-width: 120px;
+    }
+    .nes-game-btn:hover, .nes-game-btn.selected {
+      border-color: #e8ff47;
+      color: #e8ff47;
+      background: #0f0f0f;
+    }
+    .nes-game-btn .game-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+
+    #nes-canvas-wrap {
+      position: relative;
+      border: 2px solid #2a2a2a;
+      display: none;
+    }
+    #nes-canvas-wrap.active { display: block; }
+    #nes-canvas { display: block; image-rendering: pixelated; }
+
+    .nes-controls {
+      margin-top: 1rem;
+      color: #333;
+      font-size: 0.7rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    .nes-controls span { color: #555; margin: 0 0.5rem; }
+
+    .nes-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: 1px solid #2a2a2a;
+      color: #555;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-family: 'Courier New', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+    .nes-close:hover { border-color: #e8ff47; color: #e8ff47; }
+
+    .nes-loading {
+      color: #e8ff47;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      animation: blink-loading 1s infinite;
+    }
+    @keyframes blink-loading {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .konami-hint {
+      position: fixed;
+      bottom: 5.5rem;
+      left: 2rem;
+      font-size: 0.65rem;
+      color: #1a1a1a;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      transition: color 0.3s;
+      z-index: 500;
+    }
+    .konami-hint.progress { color: #2a2a2a; }
+  </style>
+
+  <div id="nes-overlay">
+    <button class="nes-close" id="nes-close-btn">[ ESC ] SALIR</button>
+    <div class="nes-header">
+      <h2>🕹️ PGA ARCADE</h2>
+      <p>SELECCIONA UN JUEGO</p>
+    </div>
+    <div class="nes-game-select" id="nes-game-select">
+      <button class="nes-game-btn" data-game="gradius">
+        <span class="game-icon">🚀</span>GRADIUS
+      </button>
+      <button class="nes-game-btn" data-game="probotector">
+        <span class="game-icon">🤖</span>PROBOTECTOR
+      </button>
+      <button class="nes-game-btn" data-game="pang">
+        <span class="game-icon">🎈</span>PANG
+      </button>
+    </div>
+    <div id="nes-loading" class="nes-loading" style="display:none;">CARGANDO ROM...</div>
+    <div id="nes-canvas-wrap">
+      <canvas id="nes-canvas" width="512" height="480"></canvas>
+    </div>
+    <div class="nes-controls">
+      <span style="color:#e8ff47;margin-bottom:0.5rem;display:block;">CONTROLES</span>
+      <span>↑↓←→ mover</span>
+      <span>Z = botón A</span>
+      <span>X = botón B</span>
+      <span>ENTER = START</span>
+      <span>SHIFT = SELECT</span>
+      <span style="margin-top:0.5rem;display:block;">ESC para salir</span>
+    </div>
+  </div>
+
+  <div class="konami-hint" id="konami-hint">↑↑↓↓←→←→BA</div>
+
+  <script>
+    // KONAMI CODE DETECTOR
+    const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let konamiIndex = 0;
+    const hint = document.getElementById('konami-hint');
+    const konamiLabels = ['↑','↑','↓','↓','←','→','←','→','B','A'];
+
+    function updateHint() {
+      const done = konamiLabels.slice(0, konamiIndex).join('');
+      const remaining = konamiLabels.slice(konamiIndex).join('');
+      hint.innerHTML = '<span style="color:#e8ff47">' + done + '</span><span style="color:#1a1a1a">' + remaining + '</span>';
+    }
+    updateHint();
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeNes(); return; }
+      if (e.key === KONAMI[konamiIndex]) {
+        konamiIndex++;
+        updateHint();
+        if (konamiIndex === KONAMI.length) {
+          konamiIndex = 0;
+          updateHint();
+          openNes();
+        }
+      } else {
+        konamiIndex = 0;
+        updateHint();
+      }
+    });
+
+    // NES OVERLAY
+    const overlay = document.getElementById('nes-overlay');
+    const closeBtn = document.getElementById('nes-close-btn');
+    let emulatorScriptLoaded = false;
+
+    function openNes() {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNes() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      const emuWrap = document.getElementById('nes-canvas-wrap');
+      emuWrap.classList.remove('active');
+      emuWrap.innerHTML = '';
+      document.getElementById('nes-loading').style.display = 'none';
+      document.querySelectorAll('.nes-game-btn').forEach(b => b.classList.remove('selected'));
+    }
+
+    closeBtn.addEventListener('click', closeNes);
+
+    // GAME CONFIG
+    const games = {
+      'gradius':     { rom: 'gradius.nes',      system: 'nes' },
+      'probotector': { rom: 'probotector.nes',  system: 'nes' },
+      'pang':        { rom: 'pang.zip',         system: 'arcade' }
+    };
+
+    document.querySelectorAll('.nes-game-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.nes-game-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        loadGame(btn.dataset.game);
+      });
+    });
+
+    function loadGame(gameKey) {
+      const game = games[gameKey];
+      const loading = document.getElementById('nes-loading');
+      const wrap = document.getElementById('nes-canvas-wrap');
+      loading.textContent = 'CARGANDO...';
+      loading.style.display = 'block';
+      wrap.classList.remove('active');
+      wrap.innerHTML = '';
+
+      const iframe = document.createElement('iframe');
+      iframe.style.cssText = 'width:512px;height:480px;border:none;display:block;background:#000;';
+      const iframeContent = '<!DOCTYPE html><html><head><style>body{margin:0;background:#000;overflow:hidden;}</style>' +
+        '<script>' +
+        'window.EJS_player="#game";' +
+        'window.EJS_core="' + game.system + '";' +
+        'window.EJS_gameUrl="/' + game.rom + '";' +
+        'window.EJS_pathtodata="https://cdn.emulatorjs.org/stable/data/";' +
+        'window.EJS_startOnLoaded=true;' +
+        'window.EJS_color="#e8ff47";' +
+        '<\/script>' +
+        '</head><body><div id="game"></div>' +
+        '<script src="https://cdn.emulatorjs.org/stable/data/loader.js"><\/script>' +
+        '</body></html>';
+      iframe.srcdoc = iframeContent;
+      wrap.appendChild(iframe);
+      wrap.classList.add('active');
+      loading.style.display = 'none';
     }
   </script>
 
